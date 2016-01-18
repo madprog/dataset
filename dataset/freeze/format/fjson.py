@@ -51,6 +51,8 @@ class JSONSerializer(Serializer):
                               cls=JSONEncoder,
                               indent=self.export.get_int('indent'),
                               separators=self.export.get('separators', None))
+            if not PY3:
+                data = data.encode('utf-8')
 
             callback = self.export.get('callback')
             if callback:

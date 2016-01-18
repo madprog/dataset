@@ -6,7 +6,7 @@ import unittest
 from tempfile import mkdtemp
 from shutil import rmtree
 
-from six import PY3, text_type, binary_type
+from six import PY3, text_type, binary_type, StringIO
 
 from dataset import connect
 from dataset.freeze.app import freeze
@@ -63,11 +63,6 @@ class FreezeTestCase(unittest.TestCase):
             fh.close()
 
     def test_memory_streams(self):
-        if PY3:
-            from io import StringIO
-        else:
-            from io import BytesIO as StringIO
-
         for fmt in ('csv', 'json', 'tabson'):
             with StringIO() as fd:
                 freeze(self.tbl.all(), format=fmt, fileobj=fd)
@@ -110,11 +105,6 @@ class FreezeTestCase(unittest.TestCase):
             fh.close()
 
     def test_freeze_compact_json_with_custom_separators(self):
-        if PY3:
-            from io import StringIO
-        else:
-            from io import BytesIO as StringIO
-
         with StringIO() as fd:
             freeze(self.tbl.all(), format='json', fileobj=fd, indent=None, separators=(',',':'))
             if PY3:
