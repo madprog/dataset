@@ -83,8 +83,8 @@ def freeze(result, format='csv', filename='freeze.csv', fileobj=None,
 
         As an example, you can freeze to minified JSON with the following:
 
-            dataset.freeze(res, format='json', indent=4, wrap=False,
-                           filename='output.json')
+            dataset.freeze(res, format='json', indent=None, wrap=False,
+                           separators=(',', ':'), filename='output.json')
 
         *json* and *tabson*
             *callback*:
@@ -102,6 +102,12 @@ def freeze(result, format='csv', filename='freeze.csv', fileobj=None,
             *meta*:
                 if *meta* is not ``None`` (default: ``{}``), it will be included
                 in the JSON output (for *json*, only if *wrap* is ``True``).
+
+            *separators*:
+                if *separators* is an ``(item_separator, dict_separator)``
+                tuple, then it will be used instead of the default
+                ``(', ', ': ')`` separators.
+                ``(',', ':')`` is the most compact JSON representation.
 
             *wrap* (only for *json*):
                 if *wrap* is ``True`` (default), the JSON output is an object

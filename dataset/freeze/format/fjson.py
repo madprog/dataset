@@ -49,7 +49,8 @@ class JSONSerializer(Serializer):
 
             data = json.dumps(result,
                               cls=JSONEncoder,
-                              indent=self.export.get_int('indent'))
+                              indent=self.export.get_int('indent'),
+                              separators=self.export.get('separators', None))
 
             callback = self.export.get('callback')
             if callback:
